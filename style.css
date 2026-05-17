@@ -1,0 +1,70 @@
+/* Reseteo básico para limpiar márgenes por defecto del navegador */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #191919; /* Fondo Notion Oscuro */
+    color: #EBEBEB; /* Texto claro suave */
+    font-family: 'Inter', sans-serif; /* Letra moderna para lectura */
+    line-height: 1.7;
+    padding: 40px 20px;
+}
+
+/* El truco de la columna central */
+.contenedor {
+    max-width: 700px;
+    margin: 0 auto; /* Esto lo centra en la pantalla */
+}
+
+/* La tipografía de Terminal para elementos clave */
+h1, h2, h3, time, .leer-mas {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+header {
+    margin-bottom: 60px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #333;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+article {
+    margin-bottom: 50px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #2a2a2a; /* Línea separadora muy sutil */
+}
+
+article h2 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+time {
+    display: block;
+    font-size: 0.85rem;
+    color: #888888;
+    margin-bottom: 15px;
+}
+
+.leer-mas {
+    display: inline-block;
+    margin-top: 15px;
+    color: #00ff88; /* Verde Neón Hacker */
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 0.2s ease-in-out;
+}
+
+.leer-mas:hover {
+    color: #ffffff;
+    text-shadow: 0 0 8px #00ff88; /* Pequeño brillo al pasar el mouse */
+}
