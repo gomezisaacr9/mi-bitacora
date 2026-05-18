@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorando las Novedades de ES2023: Métodos de Arrays Inmutables</title>
+    <!-- Mismos enlaces de fuente que index.html -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Mismo archivo CSS que index.html -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="contenedor">
+        <!-- Enlace "Volver al inicio": Reutiliza la clase 'leer-mas' para el estilo,
+             ajustando el margen y el display para que funcione como un bloque.
+             El '←' es parte del texto, no CSS. -->
+        <a href="index.html" class="leer-mas" style="display: block; margin-bottom: 40px;">← Volver al inicio</a>
+
+        <main>
+            <!-- El título principal del artículo. Utiliza h1 para la semántica de la página de detalle. -->
+            <h1>Explorando las Novedades de ES2023: Métodos de Arrays Inmutables</h1>
+            <!-- La fecha, utilizando la etiqueta time para mantener el estilo de JetBrains Mono. -->
+            <time datetime="2023-11-15">15 de noviembre de 2023</time>
+            
+            <p>
+                ECMAScript 2023 (ES2023) trae consigo una serie de mejoras interesantes, pero sin duda, una de las adiciones más bienvenidas para el desarrollo diario son los nuevos métodos de arrays que operan de forma inmutable. Esto significa que en lugar de modificar el array original, estos métodos devuelven una nueva copia del array con los cambios aplicados, promoviendo una programación más funcional y predecible. Esto es especialmente útil en contextos donde la inmutabilidad es clave, como en la gestión de estados en aplicaciones React o Vue.
+            </p>
+            
+            <h2>Los Nuevos Métodos de Arrays</h2>
+
+            <p>
+                Los métodos que se han añadido son <code>toSorted()</code>, <code>toReversed()</code>, <code>toSpliced()</code> y <code>with()</code>. Todos ellos son versiones inmutables de sus contrapartes mutables (<code>sort()</code>, <code>reverse()</code>, <code>splice()</code> y la asignación de índice <code>arr[index] = value</code> respectivamente). Adoptar estos métodos puede reducir la cantidad de código boilerplate que a menudo escribimos para crear copias de arrays antes de modificarlos (por ejemplo, usando el operador spread <code>[...]</code>).
+            </p>
+
+            <h3><code>toSorted()</code>: Ordenación Inmutable</h3>
+            <p>
+                Similar a <code>sort()</code>, pero devuelve un nuevo array ordenado sin modificar el original. Es perfecto para mostrar datos ordenados sin alterar la fuente de datos. Puede recibir una función de comparación opcional.
+            </p>
+            <!-- Los bloques de código usan JetBrains Mono via un estilo inline,
+                 ya que style.css no define estilos para pre/code. -->
+            <pre style="font-family: 'JetBrains Mono', monospace; background-color: #2a2a2a; padding: 15px; border-radius: 5px; overflow-x: auto; margin-bottom: 20px;"><code class="language-js" style="color: #EBEBEB;">
+const numeros = [3, 1, 4, 1, 5, 9, 2];
+const numerosOrdenados = numeros.toSorted((a, b) => a - b);
+
+console.log(numeros);          // [3, 1, 4, 1, 5, 9, 2] (original sin cambios)
+console.log(numerosOrdenados); // [1, 1, 2, 3, 4, 5, 9]
+            </code></pre>
+
+            <h3><code>toReversed()</code>: Inversión Inmutable</h3>
+            <p>
+                Esta es la versión inmutable de <code>reverse()</code>. Crea y devuelve un nuevo array con los elementos en orden inverso, dejando intacto el array original.
+            </p>
+            <pre style="font-family: 'JetBrains Mono', monospace; background-color: #2a2a2a; padding: 15px; border-radius: 5px; overflow-x: auto; margin-bottom: 20px;"><code class="language-js" style="color: #EBEBEB;">
+const frutas = ['manzana', 'banana', 'cereza'];
+const frutasInvertidas = frutas.toReversed();
+
+console.log(frutas);           // ['manzana', 'banana', 'cereza'] (original sin cambios)
+console.log(frutasInvertidas); // ['cereza', 'banana', 'manzana']
+            </code></pre>
+
+            <h3><code>toSpliced()</code>: Extracción/Inserción/Reemplazo Inmutable</h3>
+            <p>
+                <code>toSpliced()</code> es la versión inmutable de <code>splice()</code>. Es un método muy potente que permite añadir, eliminar o reemplazar elementos en cualquier posición del array, devolviendo un nuevo array con los cambios.
+            </p>
+            <pre style="font-family: 'JetBrains Mono', monospace; background-color: #2a2a2a; padding: 15px; border-radius: 5px; overflow-x: auto; margin-bottom: 20px;"><code class="language-js" style="color: #EBEBEB;">
+const colores = ['rojo', 'verde', 'azul', 'amarillo'];
+
+// Eliminar un elemento
+const sinVerde = colores.toSpliced(1, 1);
+console.log(colores);    // ['rojo', 'verde', 'azul', 'amarillo']
+console.log(sinVerde);   // ['rojo', 'azul', 'amarillo']
+
+// Insertar un elemento
+const conNaranja = colores.toSpliced(2, 0, 'naranja');
+console.log(conNaranja); // ['rojo', 'verde', 'naranja', 'azul', 'amarillo']
+
+// Reemplazar un elemento
+const moradoEnLugarDeAzul = colores.toSpliced(2, 1, 'morado');
+console.log(moradoEnLugarDeAzul); // ['rojo', 'verde', 'morado', 'amarillo']
+            </code></pre>
+            
+            <h3><code>with()</code>: Actualización de Elementos por Índice</h3>
+            <p>
+                El método <code>with()</code> es análogo a la asignación por índice (<code>array[index] = value</code>), pero de manera inmutable. Permite actualizar un elemento en una posición específica del array sin mutar el original, devolviendo un nuevo array con el elemento modificado.
+            </p>
+            <pre style="font-family: 'JetBrains Mono', monospace; background-color: #2a2a2a; padding: 15px; border-radius: 5px; overflow-x: auto; margin-bottom: 20px;"><code class="language-js" style="color: #EBEBEB;">
+const tareas = ['Comprar pan', 'Escribir informe', 'Llamar a Juan'];
+
+// Marcar la primera tarea como completada (modificándola)
+const tareasActualizadas = tareas.with(0, 'Comprar pan (completado)');
+
+console.log(tareas);            // ['Comprar pan', 'Escribir informe', 'Llamar a Juan']
+console.log(tareasActualizadas); // ['Comprar pan (completado)', 'Escribir informe', 'Llamar a Juan']
+
+// Intentar usar un índice fuera de rango lanza un error RangeError
+try {
+    tareas.with(5, 'Nueva tarea');
+} catch (e) {
+    console.error(e.name); // RangeError
+}
+            </code></pre>
+
+            <p>
+                Estos nuevos métodos son un gran paso hacia una manipulación de arrays más segura y expresiva en JavaScript, especialmente para aquellos que buscan abrazar patrones de programación funcional y mantener la inmutabilidad de los datos. ¡Anímate a integrarlos en tus proyectos!
+            </p>
+        </main>
+    </div>
+</body>
+</html>

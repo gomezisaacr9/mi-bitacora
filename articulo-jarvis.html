@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construyendo a Jarvis: Un Asistente Local para Optimizar Recursos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="contenedor">
+        <a href="index.html" class="leer-mas" style="display: block; margin-bottom: 40px;">← Volver al inicio</a>
+
+        <main>
+            <h1>Construyendo a <strong class="leer">Jarvis</strong>: Un Asistente Local para Optimizar Recursos</h1>
+            
+            <p>
+                Hola, soy <strong class="leer">IsaacG</strong>. Creé este artículo para explicar por qué y para qué creé a Jarvis. Actualmente estoy en un contexto donde tengo una PC de muy bajos recursos y quería evitar abrir páginas web que consumieran los recursos valiosos, por lo que me decidí a crear a <strong>Jarvis</strong>, un asistente que me permite crear código, editar y corregir errores, basado en el contexto general de la aplicación. Y ya sé que existen alternativas ya creadas por la comunidad e incluso de pago, pero quería tener la mía propia: <strong>Jarvis</strong>, un asistente de código local y ligero.
+            </p>
+            
+            <p class="leer">
+                Su objetivo principal es evitar la dependencia del navegador interactuando directamente con la API de inteligencia artificial desde el entorno local. A continuación, detallo la arquitectura central que hace esto posible.
+            </p>
+
+            <h2>1. El Motor: Integración Directa mediante API</h2>
+            <p>
+                El núcleo de Jarvis actúa como un cliente ligero. En lugar de procesar información localmente o requerir una interfaz gráfica pesada, el sistema captura las instrucciones del usuario y las envía directamente a la infraestructura en la nube de Google a través de su API. Esto permite obtener la potencia de un modelo avanzado con un costo computacional local casi nulo.
+            </p>
+            <pre style="font-family: 'JetBrains Mono', monospace; background-color: #2a2a2a; padding: 15px; border-radius: 5px; overflow-x: auto; margin-bottom: 20px;"><code class="language-js" style="color: #EBEBEB;">
+// Inicialización del cliente y conexión con la API
+const modelo = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+// Envío del prompt y captura de la respuesta asíncrona
+const resultado = await modelo.generateContent(tuPregunta);
+const respuesta = await resultado.response.text();
+
+// Salida en la consola local
+console.log(respuesta);
+            </code></pre>
+
+            <h2>2. Modo Edición: Modificación de Archivos en Caliente</h2>
+            <p>
+                Para automatizar la refactorización o corrección de código, Jarvis implementa un flujo de operaciones de entrada/salida (I/O) en el sistema de archivos. El asistente lee el código fuente existente, lo adjunta como contexto al prompt del usuario y, tras recibir la respuesta de la IA, sobrescribe el archivo original.
+            </p>
+            <pre style="font-family: 'JetBrains Mono', monospace; background-color: #2a2a2a; padding: 15px; border-radius: 5px; overflow-x: auto; margin-bottom: 20px;"><code class="language-js" style="color: #EBEBEB;">
+const fs = require('fs');
+
+// 1. Lectura del estado actual del archivo
+let contenidoActual = fs.readFileSync(archivo, 'utf8');
+
+// 2. Procesamiento a través de la API (abstraído)
+// const codigoFinal = await solicitarCambios(contenidoActual, promptUsuario);
+
+// 3. Sobrescritura del archivo con el código actualizado
+fs.writeFileSync(archivo, codigoFinal, 'utf8');
+            </code></pre>
+
+            <h2>3. Modo Creador: Generación Basada en Contexto</h2>
+            <p>
+                El mayor desafío al generar nuevos archivos es mantener la coherencia visual y estructural con el resto del repositorio. Para resolver esto, Jarvis cuenta con un <strong>módulo de escaneo de contexto</strong>. Antes de solicitar la generación de un nuevo archivo, el script analiza los archivos existentes del proyecto para identificar convenciones de nomenclatura, paletas de colores y estructuras de código.
+            </p>
+            <p>
+                Este "contexto global" se inyecta en el prompt, obligando a la IA a respetar el estilo del proyecto.
+            </p>
+            <pre style="font-family: 'JetBrains Mono', monospace; background-color: #2a2a2a; padding: 15px; border-radius: 5px; overflow-x: auto; margin-bottom: 20px;"><code class="language-js" style="color: #EBEBEB;">
+// Función para escanear y compilar el estado del repositorio
+function obtenerContextoProyecto() {
+    // Lógica para iterar sobre el directorio, leer convenciones y extraer patrones
+    // ...
+    return contextoGlobalDeDibujos; 
+}
+
+// Generación de un nuevo archivo manteniendo la coherencia del proyecto
+// const codigoFinal = await generarNuevoArchivo(promptUsuario, obtenerContextoProyecto());
+
+// Escritura del nuevo componente en el sistema
+fs.writeFileSync(archivoNuevo, codigoFinal, 'utf8');
+            </code></pre>
+
+            <p>
+                <strong>Conclusión:</strong> Jarvis demuestra cómo la creación de herramientas personalizadas puede resolver bloqueos técnicos específicos. Al trasladar la carga de trabajo a la nube y operar estrictamente desde el sistema de archivos local, es posible mantener un flujo de trabajo ágil e inteligente, independientemente de las limitaciones de hardware del equipo de desarrollo.
+            </p>
+        </main>
+    </div>
+</body>
+</html>
