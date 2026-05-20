@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entendiendo la Interacción del Usuario: Construyendo una Mini-Calculadora en JavaScript</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="contenedor">
+        <a href="index.html" class="leer-mas" style="display: block; margin-bottom: 40px;">← Volver al inicio</a>
+
+        <main>
+            <h1>Entendiendo la Interacción del Usuario: Construyendo una <strong class="leer">Mini-Calculadora</strong> en JavaScript</h1>
+            <time datetime="2023-12-05">05 de diciembre de 2023</time>
+            
+            <p>
+                En el mundo del desarrollo web, la interacción con el usuario es fundamental. Desde simples botones hasta complejos formularios, JavaScript nos permite dar vida a nuestras interfaces. En este artículo, analizaremos un ejemplo sencillo pero ilustrativo: una mini-calculadora que toma dos números y muestra su suma. Este ejercicio nos ayudará a comprender los fundamentos de la manipulación del DOM (Document Object Model) y el manejo de eventos en JavaScript puro.
+            </p>
+            
+            <h2>1. Capturando Elementos del DOM</h2>
+            <p>
+                Antes de poder interactuar con los elementos HTML desde JavaScript, necesitamos 'capturarlos'. Esto se logra comúnmente utilizando métodos como <code>document.getElementById()</code>, que nos permite obtener una referencia a un elemento específico mediante su ID único. En nuestro ejemplo, identificamos el botón de ejecución, los dos campos de entrada de números y el área donde se mostrará el resultado en la "terminal".
+            </p>
+            <pre style="font-family: 'JetBrains Mono', monospace; background-color: #2a2a2a; padding: 15px; border-radius: 5px; overflow-x: auto; margin-bottom: 20px;"><code class="language-js" style="color: #EBEBEB;">
+let btnEjecutar = document.getElementById("btn-ejecutar");
+let num1 = document.getElementById("num1");
+let num2 = document.getElementById("num2");
+let salida = document.getElementById("salida-terminal");
+            </code></pre>
+
+            <h2>2. Respondiendo a la Interacción: El Event Listener</h2>
+            <p>
+                Una vez que tenemos referencias a nuestros elementos, el siguiente paso es hacer que la página responda a las acciones del usuario. Para el botón 'Ejecutar', adjuntamos un 'event listener' utilizando <code>addEventListener()</code>. Este método espera dos argumentos: el tipo de evento que queremos escuchar (en este caso, <strong class="leer">'click'</strong>) y una función (callback) que se ejecutará cada vez que ocurra ese evento. Es dentro de esta función donde definimos qué sucederá cuando el usuario haga clic.
+            </p>
+            <pre style="font-family: 'JetBrains Mono', monospace; background-color: #2a2a2a; padding: 15px; border-radius: 5px; overflow-x: auto; margin-bottom: 20px;"><code class="language-js" style="color: #EBEBEB;">
+btnEjecutar.addEventListener("click", () => {
+    // Aquí irá la lógica de nuestra calculadora
+});
+            </code></pre>
+
+            <h2>3. Procesamiento y Presentación de Resultados</h2>
+            <p>
+                Dentro de la función del evento, es donde ocurre la lógica principal. Es importante recordar que los valores de los campos de entrada HTML (`<input>`) siempre se obtienen como <strong class="leer">cadenas de texto</strong>, incluso si el usuario introduce números. Por lo tanto, es crucial convertirlos explícitamente a tipos numéricos (usando la función <strong class="leer"><code>Number()</code></strong>) antes de realizar cualquier operación matemática. Finalmente, el resultado se inyecta en el elemento de salida utilizando la propiedad <code>textContent</code>, que es una forma segura de mostrar texto, y las plantillas de cadena (template literals) para construir un mensaje claro y dinámico.
+            </p>
+            <pre style="font-family: 'JetBrains Mono', monospace; background-color: #2a2a2a; padding: 15px; border-radius: 5px; overflow-x: auto; margin-bottom: 20px;"><code class="language-js" style="color: #EBEBEB;">
+    let resultado = Number(num1.value) + Number(num2.value);
+    salida.textContent = `El resultado es = ${resultado}`;
+            </code></pre>
+
+            <p>
+                Juntando todas las piezas, este es el código JavaScript completo de nuestro ejemplo de mini-calculadora:
+            </p>
+            <pre style="font-family: 'JetBrains Mono', monospace; background-color: #2a2a2a; padding: 15px; border-radius: 5px; overflow-x: auto; margin-bottom: 20px;"><code class="language-js" style="color: #EBEBEB;">
+// Primero capturo los inputs de interés
+let btnEjecutar = document.getElementById("btn-ejecutar");
+let num1 = document.getElementById("num1");
+let num2 = document.getElementById("num2");
+let salida = document.getElementById("salida-terminal");
+
+// Creo luego un evento click y como función (el segundo parámetro) le pido
+// que guarde el resultado en una variable para luego inyectarlo en HTML con textContent.
+btnEjecutar.addEventListener("click", () => {
+    let resultado = Number(num1.value) + Number(num2.value);
+    salida.textContent = `El resultado es = ${resultado}`;
+});
+            </code></pre>
+
+            <p>
+                <strong class="leer">Conclusión:</strong> Este pequeño ejemplo ilustra cómo JavaScript interactúa con el HTML para crear experiencias dinámicas. Desde la selección de elementos hasta la respuesta a eventos y la manipulación de datos, estos son los bloques de construcción básicos para cualquier aplicación web interactiva. Con estos fundamentos, estás listo para abordar interacciones más complejas y llevar tus proyectos al siguiente nivel. ¡Anímate a experimentar!
+            </p>
+        </main>
+    </div>
+</body>
+</html>

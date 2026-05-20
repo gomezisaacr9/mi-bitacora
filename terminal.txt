@@ -1,0 +1,11 @@
+//Primero capturo los inputs de interes
+let btnEjecutar = document.getElementById("btn-ejecutar") 
+let num1= document.getElementById("num1")
+let num2= document.getElementById("num2")
+let salida = document.getElementById("salida-terminal")
+// creo luego un evento click y como funcion es decir el segundo parametro le pido que guarde el resultado en una variable para luego inyectarlo en html con textContent
+btnEjecutar.addEventListener("click", ()=>{
+ let resultado = Number(num1.value) + Number(num2.value) 
+  salida.textContent = `El resultado es = ${resultado}`
+
+}) 
